@@ -1,0 +1,1 @@
+import{j as a}from"./main-CUJEGI8U.js";import{a as s}from"./admin-config-DTFkVWJm.js";import{D as i}from"./settings-links-6v3CjZ6H.js";function m({className:o,hash:n,variant:r}){if(!s.pages.channels)return null;const e=n?`${s.pages.channels}#${n}`:s.pages.channels;return a.jsx(i,{link:e,className:o,variant:r,size:"xs"})}export{m as C};
