@@ -1,0 +1,867 @@
+/**
+ * ELSFM Music Player - Frontend Styles
+ *
+ * Uses CSS custom properties for easy theming.
+ * The accent color is set via WordPress admin settings.
+ */
+
+:root {
+    --elsfm-accent: #1db954;
+    --elsfm-bg: #181818;
+    --elsfm-bg-elevated: #282828;
+    --elsfm-bg-hover: #333;
+    --elsfm-text: #fff;
+    --elsfm-text-muted: #b3b3b3;
+    --elsfm-text-dim: #727272;
+    --elsfm-radius: 8px;
+    --elsfm-radius-sm: 4px;
+    --elsfm-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+/* ========================================================================
+   Shared Utilities
+   ======================================================================== */
+
+.elsfm-error {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    padding: 12px 16px;
+    border-radius: var(--elsfm-radius);
+    font-family: var(--elsfm-font);
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.elsfm-no-results {
+    color: var(--elsfm-text-muted);
+    font-family: var(--elsfm-font);
+    text-align: center;
+    padding: 24px;
+}
+
+.elsfm-loading {
+    display: flex;
+    justify-content: center;
+    padding: 32px;
+}
+
+.elsfm-loading::after {
+    content: '';
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--elsfm-bg-hover);
+    border-top-color: var(--elsfm-accent);
+    border-radius: 50%;
+    animation: elsfm-spin 0.6s linear infinite;
+}
+
+@keyframes elsfm-spin {
+    to { transform: rotate(360deg); }
+}
+
+.elsfm-label {
+    display: inline-block;
+    font-family: var(--elsfm-font);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--elsfm-text-muted);
+}
+
+.elsfm-section {
+    margin-top: 24px;
+}
+
+.elsfm-section h4 {
+    font-family: var(--elsfm-font);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--elsfm-text);
+    margin: 0 0 12px;
+}
+
+.elsfm-no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--elsfm-bg-elevated);
+    color: var(--elsfm-text-dim);
+}
+
+/* ========================================================================
+   Single Track Card  [elsfm_track]
+   ======================================================================== */
+
+.elsfm-single-track {
+    display: flex;
+    gap: 20px;
+    background: var(--elsfm-bg);
+    border-radius: var(--elsfm-radius);
+    padding: 20px;
+    font-family: var(--elsfm-font);
+    color: var(--elsfm-text);
+    max-width: 600px;
+}
+
+.elsfm-single-track .elsfm-track-artwork {
+    flex-shrink: 0;
+    width: 140px;
+    height: 140px;
+    border-radius: var(--elsfm-radius);
+    overflow: hidden;
+    background: var(--elsfm-bg-elevated);
+}
+
+.elsfm-single-track .elsfm-track-artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.elsfm-single-track .elsfm-track-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.elsfm-track-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.elsfm-track-meta {
+    color: var(--elsfm-text-muted);
+    font-size: 14px;
+    margin: 0 0 2px;
+}
+
+.elsfm-track-album {
+    color: var(--elsfm-text-dim);
+    font-size: 13px;
+    margin: 0 0 12px;
+}
+
+.elsfm-track-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.elsfm-track-time {
+    font-size: 13px;
+    color: var(--elsfm-text-muted);
+}
+
+/* ========================================================================
+   Play Buttons
+   ======================================================================== */
+
+.elsfm-play-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--elsfm-text-muted);
+    padding: 4px;
+    border-radius: 50%;
+    transition: color 0.15s, transform 0.15s;
+}
+
+.elsfm-play-btn:hover {
+    color: var(--elsfm-text);
+    transform: scale(1.1);
+}
+
+.elsfm-play-btn--large {
+    width: 44px;
+    height: 44px;
+    background: var(--elsfm-accent);
+    color: #fff;
+    border-radius: 50%;
+}
+
+.elsfm-play-btn--large:hover {
+    background: var(--elsfm-accent);
+    filter: brightness(1.15);
+    color: #fff;
+    transform: scale(1.06);
+}
+
+/* ========================================================================
+   Tracklist
+   ======================================================================== */
+
+.elsfm-tracklist {
+    font-family: var(--elsfm-font);
+    color: var(--elsfm-text);
+}
+
+.elsfm-track-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: var(--elsfm-radius-sm);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.elsfm-track-row:hover {
+    background: var(--elsfm-bg-hover);
+}
+
+.elsfm-track-row--active {
+    background: var(--elsfm-bg-elevated);
+}
+
+.elsfm-track-row--playing .elsfm-track-name {
+    color: var(--elsfm-accent);
+}
+
+.elsfm-track-num {
+    width: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--elsfm-text-muted);
+    flex-shrink: 0;
+}
+
+.elsfm-track-img {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--elsfm-radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--elsfm-bg-elevated);
+}
+
+.elsfm-track-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.elsfm-track-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.elsfm-track-name {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--elsfm-text);
+}
+
+.elsfm-track-artist {
+    font-size: 12px;
+    color: var(--elsfm-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.elsfm-track-plays {
+    font-size: 12px;
+    color: var(--elsfm-text-dim);
+    flex-shrink: 0;
+    min-width: 50px;
+    text-align: right;
+}
+
+.elsfm-track-duration {
+    font-size: 13px;
+    color: var(--elsfm-text-muted);
+    flex-shrink: 0;
+    min-width: 36px;
+    text-align: right;
+}
+
+.elsfm-track-row .elsfm-play-btn {
+    opacity: 0;
+    flex-shrink: 0;
+}
+
+.elsfm-track-row:hover .elsfm-play-btn {
+    opacity: 1;
+}
+
+/* ========================================================================
+   Album Card  [elsfm_album]
+   ======================================================================== */
+
+.elsfm-album,
+.elsfm-playlist {
+    background: var(--elsfm-bg);
+    border-radius: var(--elsfm-radius);
+    padding: 24px;
+    font-family: var(--elsfm-font);
+    color: var(--elsfm-text);
+    max-width: 800px;
+}
+
+.elsfm-album-header,
+.elsfm-playlist-header {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    align-items: flex-end;
+}
+
+.elsfm-album-artwork,
+.elsfm-playlist-artwork {
+    width: 180px;
+    height: 180px;
+    border-radius: var(--elsfm-radius);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--elsfm-bg-elevated);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.elsfm-album-artwork img,
+.elsfm-playlist-artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.elsfm-album-info,
+.elsfm-playlist-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-width: 0;
+}
+
+.elsfm-album-title,
+.elsfm-playlist-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 4px 0 8px;
+    line-height: 1.2;
+}
+
+.elsfm-album-artist {
+    font-size: 14px;
+    color: var(--elsfm-text-muted);
+    margin: 0;
+}
+
+.elsfm-album-year {
+    font-size: 13px;
+    color: var(--elsfm-text-dim);
+}
+
+.elsfm-playlist-desc {
+    font-size: 14px;
+    color: var(--elsfm-text-muted);
+    margin: 0 0 4px;
+}
+
+.elsfm-playlist-meta {
+    font-size: 13px;
+    color: var(--elsfm-text-dim);
+    margin: 0;
+}
+
+/* ========================================================================
+   Artist Card  [elsfm_artist]
+   ======================================================================== */
+
+.elsfm-artist {
+    background: var(--elsfm-bg);
+    border-radius: var(--elsfm-radius);
+    padding: 24px;
+    font-family: var(--elsfm-font);
+    color: var(--elsfm-text);
+    max-width: 800px;
+}
+
+.elsfm-artist-header {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.elsfm-artist-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--elsfm-bg-elevated);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.elsfm-artist-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.elsfm-artist-name {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.elsfm-verified {
+    color: var(--elsfm-accent);
+}
+
+.elsfm-artist-followers {
+    font-size: 14px;
+    color: var(--elsfm-text-muted);
+    margin: 0;
+}
+
+.elsfm-artist-bio {
+    font-size: 14px;
+    color: var(--elsfm-text-muted);
+    line-height: 1.5;
+    margin: 8px 0 0;
+}
+
+/* ========================================================================
+   Grid Layout (albums, artists, tracks grid)
+   ======================================================================== */
+
+.elsfm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    font-family: var(--elsfm-font);
+}
+
+.elsfm-grid-item {
+    background: var(--elsfm-bg-elevated);
+    border-radius: var(--elsfm-radius);
+    padding: 12px;
+    transition: background 0.2s;
+    cursor: default;
+}
+
+.elsfm-grid-item:hover {
+    background: var(--elsfm-bg-hover);
+}
+
+.elsfm-grid-img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--elsfm-radius);
+    overflow: hidden;
+    background: var(--elsfm-bg);
+    margin-bottom: 10px;
+}
+
+.elsfm-grid--round .elsfm-grid-img {
+    border-radius: 50%;
+}
+
+.elsfm-grid-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.elsfm-grid-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--elsfm-text);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.elsfm-grid-subtitle {
+    font-size: 12px;
+    color: var(--elsfm-text-muted);
+    margin: 2px 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Play overlay on grid items */
+.elsfm-play-overlay {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 44px;
+    height: 44px;
+    background: var(--elsfm-accent);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.elsfm-grid-item:hover .elsfm-play-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.elsfm-play-overlay:hover {
+    filter: brightness(1.15);
+    transform: scale(1.06);
+}
+
+/* ========================================================================
+   Search Form
+   ======================================================================== */
+
+.elsfm-search-form {
+    font-family: var(--elsfm-font);
+    max-width: 700px;
+}
+
+.elsfm-search {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.elsfm-search-input {
+    flex: 1;
+    padding: 10px 16px;
+    font-size: 14px;
+    border: 1px solid var(--elsfm-bg-hover);
+    border-radius: 500px;
+    background: var(--elsfm-bg-elevated);
+    color: var(--elsfm-text);
+    outline: none;
+    font-family: var(--elsfm-font);
+}
+
+.elsfm-search-input:focus {
+    border-color: var(--elsfm-accent);
+}
+
+.elsfm-search-input::placeholder {
+    color: var(--elsfm-text-dim);
+}
+
+.elsfm-search-btn {
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    background: var(--elsfm-accent);
+    color: #fff;
+    border: none;
+    border-radius: 500px;
+    cursor: pointer;
+    font-family: var(--elsfm-font);
+    transition: filter 0.15s;
+}
+
+.elsfm-search-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* ========================================================================
+   Genre / Radio
+   ======================================================================== */
+
+.elsfm-genre,
+.elsfm-radio {
+    font-family: var(--elsfm-font);
+    color: var(--elsfm-text);
+}
+
+.elsfm-genre-title,
+.elsfm-radio-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 12px;
+}
+
+/* ========================================================================
+   Persistent Bottom Player Bar
+   ======================================================================== */
+
+.elsfm-player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999999;
+    background: var(--elsfm-bg);
+    border-top: 1px solid var(--elsfm-bg-elevated);
+    font-family: var(--elsfm-font);
+    color: var(--elsfm-text);
+}
+
+body.elsfm-has-player {
+    padding-bottom: 72px;
+}
+
+.elsfm-pb-progress-wrap {
+    height: 4px;
+    background: var(--elsfm-bg-elevated);
+    cursor: pointer;
+    position: relative;
+}
+
+.elsfm-pb-progress-wrap:hover {
+    height: 6px;
+}
+
+.elsfm-pb-progress {
+    height: 100%;
+    background: var(--elsfm-accent);
+    width: 0;
+    transition: width 0.1s linear;
+    position: relative;
+}
+
+.elsfm-pb-progress-wrap:hover .elsfm-pb-progress::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--elsfm-accent);
+    border-radius: 50%;
+}
+
+.elsfm-pb-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0 16px;
+    gap: 16px;
+}
+
+.elsfm-pb-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.elsfm-pb-art {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--elsfm-radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--elsfm-bg-elevated);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--elsfm-text-dim);
+}
+
+.elsfm-pb-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.elsfm-pb-info {
+    min-width: 0;
+}
+
+.elsfm-pb-title {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.elsfm-pb-artist {
+    font-size: 12px;
+    color: var(--elsfm-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.elsfm-pb-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.elsfm-pb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--elsfm-text);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: color 0.15s, transform 0.15s;
+}
+
+.elsfm-pb-btn:hover {
+    color: var(--elsfm-accent);
+    transform: scale(1.1);
+}
+
+.elsfm-pb-btn--play {
+    width: 40px;
+    height: 40px;
+    background: var(--elsfm-text);
+    color: var(--elsfm-bg);
+    border-radius: 50%;
+}
+
+.elsfm-pb-btn--play:hover {
+    background: var(--elsfm-text);
+    color: var(--elsfm-bg);
+    transform: scale(1.06);
+}
+
+.elsfm-pb-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.elsfm-pb-time {
+    font-size: 12px;
+    color: var(--elsfm-text-muted);
+    min-width: 90px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.elsfm-pb-volume-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.elsfm-pb-volume {
+    width: 80px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--elsfm-bg-hover);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.elsfm-pb-volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--elsfm-text);
+    cursor: pointer;
+}
+
+.elsfm-pb-volume::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--elsfm-text);
+    border: none;
+    cursor: pointer;
+}
+
+/* ========================================================================
+   Responsive
+   ======================================================================== */
+
+@media (max-width: 640px) {
+    .elsfm-single-track {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .elsfm-single-track .elsfm-track-controls {
+        justify-content: center;
+    }
+
+    .elsfm-album-header,
+    .elsfm-playlist-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .elsfm-album-artwork,
+    .elsfm-playlist-artwork {
+        width: 140px;
+        height: 140px;
+    }
+
+    .elsfm-album-info,
+    .elsfm-playlist-info {
+        align-items: center;
+    }
+
+    .elsfm-artist-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .elsfm-artist-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .elsfm-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+    }
+
+    .elsfm-track-plays {
+        display: none;
+    }
+
+    .elsfm-pb-right {
+        display: none;
+    }
+
+    .elsfm-pb-title,
+    .elsfm-pb-artist {
+        max-width: 120px;
+    }
+}

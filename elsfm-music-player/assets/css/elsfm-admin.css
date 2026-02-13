@@ -1,0 +1,50 @@
+/**
+ * ELSFM Admin Styles
+ */
+
+.elsfm-admin-wrap h1 {
+    font-size: 23px;
+    font-weight: 400;
+    margin: 10px 0 16px;
+}
+
+.elsfm-admin-section {
+    margin: 20px 0;
+}
+
+.elsfm-admin-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#elsfm-test-connection {
+    margin-right: 10px;
+}
+
+#elsfm-test-result {
+    font-weight: 500;
+}
+
+.elsfm-success {
+    color: #46b450;
+}
+
+.elsfm-error-text {
+    color: #dc3232;
+}
+
+.elsfm-shortcode-table {
+    margin-top: 12px;
+}
+
+.elsfm-shortcode-table code {
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.elsfm-shortcode-table td,
+.elsfm-shortcode-table th {
+    padding: 10px 12px;
+}
