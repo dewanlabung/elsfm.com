@@ -1,0 +1,49 @@
+import {FullArtist, PartialArtist} from '@app/web-player/artists/artist';
+import {DatatableDataQueryKey} from '@common/datatable/requests/paginated-resources';
+import {onFormQueryError} from '@common/errors/on-form-query-error';
+import {BackendResponse} from '@common/http/backend-response/backend-response';
+import {apiClient, queryClient} from '@common/http/query-client';
+import {useMutation} from '@tanstack/react-query';
+import {message} from '@ui/i18n/message';
+import {useTrans} from '@ui/i18n/use-trans';
+import {toast} from '@ui/toast/toast';
+import {UseFormReturn} from 'react-hook-form';
+
+const endpoint = 'artists';
+
+interface Response extends BackendResponse {
+  artist: PartialArtist;
+}
+
+export interface CreateArtistPayload {
+  name?: string;
+  image_small?: string;
+  verified?: boolean;
+  spotify_id?: string;
+  genres?: FullArtist['genres'];
+  links?: FullArtist['links'];
+  profile?: FullArtist['profile'];
+  profile_images?: {
+    url: string;
+    id?: number;
+  }[];
+  disabled?: boolean;
+}
+
+export function useCreateArtist(form: UseFormReturn<CreateArtistPayload>) {
+  const {trans} = useTrans();
+  return useMutation({
+    mutationFn: (payload: CreateArtistPayload) => createAlbum(payload),
+    onSuccess: () => {
+      toast(trans(message('Artist created')));
+      queryClient.invalidateQueries({
+        queryKey: DatatableDataQueryKey(endpoint),
+      });
+    },
+    onError: err => onFormQueryError(err, form),
+  });
+}
+
+function createAlbum(payload: CreateArtistPayload) {
+  return apiClient.post<Response>(endpoint, payload).then(r => r.data);
+}
