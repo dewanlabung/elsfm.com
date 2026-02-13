@@ -1,0 +1,1 @@
+import{$ as s,e as n,ae as i,r as u}from"./main-CUJEGI8U.js";function c(){const t=s(),{isLoggedIn:a}=n(),e=i();return u.useCallback(o=>{a||(o.preventDefault(),o.stopPropagation(),t&&t.close(),e("/login"))},[e,a,t])}export{c as u};

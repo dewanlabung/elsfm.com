@@ -1,0 +1,22 @@
+.dark,
+.dark * {
+  scrollbar-width: thin;
+  scrollbar-color: #5a5a5a #2a2a2a;
+}
+
+.dark .compact-scrollbar {
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.compact-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(193 193 193) transparent;
+}
+
+.hidden-scrollbar {
+  scrollbar-width: none;
+}
+
+.stable-scrollbar {
+  scrollbar-gutter: stable;
+}
